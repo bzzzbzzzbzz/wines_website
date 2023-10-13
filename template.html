@@ -114,80 +114,30 @@
           </div>
         </div>
         <div class="row">
+          {% for category in category_names %}
           <div class="col-12 section-title text-center mb-5">
-            <h2 class="d-block">Белые вина</h2>
+            <h2 class="d-block">{{category}}</h2>
           </div>
-          {% for info_dict in alcohols["Белые вина"] %}
+          {% for info_dict in alcohols[category] %}
           <div class="col-lg-4 mb-5 col-md-6">
             <div class="wine_v_1 text-center pb-4 pt-5">
-              {% if not info_dict['Акция'] %}
-              <img src="images/{{info_dict['Картинка']}}" alt="Image" class="img-fluid">
+              {% if not info_dict[rows[5]] %}
+              <img src="images/{{info_dict[rows[4]]}}" alt="Image" class="img-fluid">
               {% else %}
-              <img src="images/{{info_dict['Картинка']}}" alt="Image" class="img-fluid">
+              <img src="images/{{info_dict[rows[4]]}}" alt="Image" class="img-fluid">
               <img src="assets/profitable.png" style="width:10rem;height: 10rem;position:absolute;right: -20px;top: -20px;">
               {% endif %}
               <div>
-                <h3 class="heading mt-3 mb-3 text-dark">{{info_dict['Название']}}</h3>
+                <h3 class="heading mt-3 mb-3 text-dark">{{info_dict[rows[1]]}}</h3>
                 <p>
-                  Сорт винограда - {{info_dict['Сорт']}}<br/>
-                  <span class="price">{{info_dict['Цена']}} р.</span>
+                  Сорт винограда - {{info_dict[rows[2]]}}<br/>
+                  <span class="price">{{info_dict[rows[3]]}} р.</span>
                 </p>
               </div>
             </div>
           </div>
           {% endfor %}
-          <div class="col-12 section-title text-center mb-5">
-            <h2 class="d-block">Красные вина</h2>
-          </div>
-          {% for info_dict in alcohols["Красные вина"] %}
-          <div class="col-lg-4 mb-5 col-md-6">
-            <div class="wine_v_1 text-center pb-4 pt-5">
-              {% if not info_dict['Акция'] %}
-              <img src="images/{{info_dict['Картинка']}}" alt="Image" class="img-fluid">
-              {% else %}
-              <img src="images/{{info_dict['Картинка']}}" alt="Image" class="img-fluid">
-              <img src="assets/profitable.png" style="width:10rem;height: 10rem;position:absolute;right: -20px;top: -20px;">
-              {% endif %}
-              <div>
-                <h3 class="heading mt-3 mb-3 text-dark">{{info_dict['Название']}}</h3>
-                <p>
-                  Сорт винограда - {{info_dict['Сорт']}}<br/>
-                  <span class="price">{{info_dict['Цена']}} р.</span>
-                </p>
-              </div>
-            </div>
-          </div>
           {% endfor %}
-          <div class="col-12 section-title text-center mb-5">
-            <h2 class="d-block">Напитки</h2>
-          </div>
-          {% for info_dict in alcohols["Напитки"] %}
-          <div class="col-lg-4 mb-5 col-md-6">
-            <div class="wine_v_1 text-center pb-4 pt-5">
-              {% if not info_dict['Акция'] %}
-              <img src="images/{{info_dict['Картинка']}}" alt="Image" class="img-fluid">
-              {% else %}
-              <img src="images/{{info_dict['Картинка']}}" alt="Image" class="img-fluid">
-              <img src="assets/profitable.png" style="width:10rem;height: 10rem;position:absolute;right: -20px;top: -20px;">
-              {% endif %}
-              <div>
-                <h3 class="heading mt-3 mb-3 text-dark">{{info_dict['Название']}}</h3>
-                {% if not info_dict['Сорт'] %}
-                <p>
-                  <span class="price">{{info_dict['Цена']}} р.</span>
-                </p>
-                {% else %}
-                <p>
-                  Сорт винограда - {{info_dict['Сорт']}}<br/>
-                  <span class="price">{{info_dict['Цена']}} р.</span>
-                </p>
-                {% endif %}
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
     </div>
 
     <div class="hero-2" style="background-image: url('assets/hero_2.jpg');">
