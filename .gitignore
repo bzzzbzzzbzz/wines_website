@@ -53,3 +53,6 @@ build/*
 [._]*.sw[a-p]
 [._]s[a-rt-v][a-z]
 [._]ss[a-gi-z]
+
+test.py
+index.html

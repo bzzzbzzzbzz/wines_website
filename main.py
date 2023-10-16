@@ -1,4 +1,4 @@
-import datetime, pandas, argparse, pprint
+import datetime, pandas, argparse
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -19,26 +19,9 @@ if __name__ == '__main__':
     args = parsed_xlsx.parse_args()
     excel_data = pandas.read_excel(args.xlsx, na_filter=False)
 
-    excel_dict = excel_data.to_dict()
-    wines_dict = defaultdict(list)
-    category_names = []
-    rows = []
-
-    for row in excel_dict:
-        rows.append(row)
-    category = rows[0]
-
-    for column in excel_dict[category]:
-        new_dict = {}
-        for row in rows:
-            new_dict[row] = excel_dict[row][column]
-        category_name = new_dict[category]
-        if category_name not in category_names:
-            category_names.append(category_name)
-        drink_type = new_dict[category]
-        wines_dict[drink_type].append(new_dict)
-
-    alcohols = dict(wines_dict)
+    categories = defaultdict(list)
+    for record in excel_data.to_dict(orient="records"):
+        categories[record['Категория']].append(record)
 
     difference = datetime.datetime.today() - datetime.datetime(year=1920, month=1, day=1)
     product_year = difference.days // 365
@@ -52,9 +35,7 @@ if __name__ == '__main__':
     rendered_page = template.render(
         product_year=product_year,
         correct_year=get_year_word(product_year),
-        alcohols=alcohols,
-        rows=rows,
-        category_names=category_names
+        categories=categories
     )
 
     with open('index.html', 'w', encoding="utf8") as file:
